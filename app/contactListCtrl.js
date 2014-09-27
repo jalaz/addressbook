@@ -67,7 +67,7 @@ define(['app'], function(app) {
         $scope.contactFilter = function (contact) {
             var search = $scope.searchText;
             return (!search || (contact.firstName + ' ' + contact.lastName).toLowerCase().indexOf(search.toLowerCase()) > -1) && 
-                    (!vm.selectedGroup || (contact.group.toLowerCase().indexOf(vm.selectedGroup.toLowerCase()) > -1));
+                    (!vm.selectedGroup || contact.group.toLowerCase() == vm.selectedGroup.toLowerCase());
         }
 
         function openCurrentContact(contacts) {

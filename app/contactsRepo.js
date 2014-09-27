@@ -3,6 +3,7 @@ define(['app'], function(app) {
     app.factory('contactsRepo', contactsRepo);
 
     function contactsRepo() {
+        var storageKey = "contactsApp.contacts";
         var repo = {
             getContacts: getContacts,
             saveContacts: saveContacts
@@ -11,7 +12,7 @@ define(['app'], function(app) {
         return repo;
 
         function getContacts() {
-            var contacts = localStorage["contacts"];
+            var contacts = localStorage[storageKey];
             if (contacts !== undefined) {
                 contacts = angular.fromJson(contacts);
             } else {
@@ -20,7 +21,7 @@ define(['app'], function(app) {
             return contacts;
         }
         function saveContacts(contacts) {
-            localStorage["contacts"] = angular.toJson(contacts);
+            localStorage[storageKey] = angular.toJson(contacts);
         }
     }
 });

@@ -18,7 +18,10 @@ define(['app'], function (app) {
             var contacts = contactsRepo.getContacts();
             var groups = {};
             for (var i = 0; i < contacts.length; i++) {
-                groups[contacts[i].group.toLowerCase()] = undefined;
+                var group = contacts[i].group;
+                if (group) {
+                    groups[contacts[i].group.toLowerCase()] = undefined;
+                }
             }
             return groups;
         };

@@ -6,42 +6,118 @@
     <link href="Content/bootstrap-theme.css" rel="stylesheet" />
     <link href="Content/bootstrap.icon-large.min.css" rel="stylesheet" />
     <link href="Content/animations.css" rel="stylesheet" />
+    <link href="Content/style.css" rel="stylesheet" />
 </head>
-<body data-ng-cloak="">
-    <div class="container container-fluid" data-ng-controller="contactListCtrl as vm">
-        <div class="row">
-            <div class="col-md-5">
-                <div class="row">
-                    <div class="col-md-10">
-                        <div class="row">
+<body data-ng-cloak="" data-ng-controller="contactListCtrl as vm">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Contacts App</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <!--<form class="navbar-form navbar-left" role="search">
+                    <div class="row">
+                        <div class="col-md-5">
                             <div class="input-group">
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
                                 <input type="text" class="form-control" placeholder="search contact" data-ng-model="searchText">
                             </div>
                         </div>
+                        <div class="col-md-4">
+                            <select class="form-control" placeholder="group" ng-model="vm.selectedGroup"
+                                    data-ng-options="key as key for (key, value) in vm.groups">
+                                <option value="">All Contacts</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="col-md-2">
-                        <div class="row">
-                            <button class="btn btn-success btn-block" data-ng-click="vm.addNew()">Add</button>
+                </form>-->
+                <!--<ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Link</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </li>
+                </ul>-->
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="container container-fluid">
+        <div class="row">
+            <div class="col-md-5">
+
+                <div class="row">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <button class="btn btn-success btn-block" data-ng-click="vm.addNew()">Add contact</button>
+                                </div>
+                                <div class="col-md-8">
+                                    
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="panel-body">
+                            
+                            <div class="row_offset_bottom clearfix">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                                            <input type="text" class="form-control" placeholder="search contact" data-ng-model="searchText">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row_offset_bottom clearfix">
+                                <select class="form-control" placeholder="group" ng-model="vm.selectedGroup" data-ng-options="key as key for (key, value) in vm.groups">
+                                    <option value="">All Contacts</option>
+                                </select>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="list-group">
+                                        <a href="#" class="list-group-item" data-ng-repeat="c in filtered = (vm.contacts | filter: contactFilter)"
+                                           data-ng-class="{active: $index == vm.activeIndex}"
+                                           data-ng-click="vm.select($index)">{{c.firstName}} {{c.lastName}}</a>
+                                    </div>
+                                    <div data-ng-hide="filtered.length" class="help-block">Nothing found</div>        
+                                </div>
+                            </div>                            
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <select class="form-control" placeholder="group" ng-model="vm.selectedGroup" data-ng-options="key as key for (key, value) in vm.groups">
-                        <option value="">All Contacts</option>
-                    </select>
-                </div>
-                <br/>
-                <div class="row">
-                    <div class="list-group">
-                        <a href="#" class="list-group-item" data-ng-repeat="c in filtered = (vm.contacts | filter: contactFilter)"
-                           data-ng-class="{active: $index == vm.activeIndex}"
-                           data-ng-click="vm.select($index)">{{c.firstName}} {{c.lastName}}</a>
-                    </div>
-                    <div data-ng-hide="filtered.length" class="help-block">Nothing found</div>
-                </div>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-7" ng-show="filtered.length || vm.activeIndex == -1">
                 <div class="panel panel-default">
                     <div class="panel-heading">{{vm.editContact.firstName}} {{vm.editContact.lastName}}</div>
                     <div class="panel-body">
@@ -87,6 +163,6 @@
 
     <script src="Scripts/angular-ui/ui-bootstrap-tpls.js"></script>
 
-    <script src="Scripts/require.js" data-main="/Scripts/main.js"></script>
+    <script src="Scripts/require.js" data-main="/scripts/main.js"></script>
 </body>
 </html>
