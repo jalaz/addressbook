@@ -1,5 +1,5 @@
 ﻿require.config({
-    baseUrl: 'addressbook/app',
+    baseUrl: 'app',
     urlArgs: 'v=1.0'
 });
 
