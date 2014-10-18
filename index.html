@@ -8,121 +8,110 @@
     <link href="Content/animations.css" rel="stylesheet" />
     <link href="Content/style.css" rel="stylesheet" />
 </head>
-<body data-ng-cloak="" data-ng-controller="contactListCtrl as vm">
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="container container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Contacts App</a>
+    <body ng-cloak data-ng-controller="contactListCtrl as vm">
+        <div class="splash"></div>
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Contacts App</a>
+                </div>
             </div>
+        </nav>
+        <div class="container container-fluid">
+            <div class="row">
+                <div class="col-md-5">
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav>
-    <div class="container container-fluid">
-        <div class="row">
-            <div class="col-md-5">
-
-                <div class="row">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <button class="btn btn-success btn-block" data-ng-click="vm.addNew()">Add contact</button>
-                                </div>
-                                <div class="col-md-8">
+                    <div class="row">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <button class="btn btn-success btn-block" data-ng-click="vm.addNew()">Add contact</button>
+                                    </div>
+                                    <div class="col-md-8">
                                     
+                                    </div>
                                 </div>
+                            
                             </div>
+                            <div class="panel-body">
                             
-                        </div>
-                        <div class="panel-body">
-                            
-                            <div class="row_offset_bottom clearfix">
-                                <div class="col-md-12">
-                                    <div class="row">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
-                                            <input type="text" class="form-control" placeholder="search contact" data-ng-model="searchText">
+                                <div class="row_offset_bottom clearfix">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                                                <input type="text" class="form-control" placeholder="search contact" data-ng-model="searchText">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row_offset_bottom clearfix">
-                                <select class="form-control" placeholder="group" ng-model="vm.selectedGroup" data-ng-options="key as key for (key, value) in vm.groups">
-                                    <option value="">All Contacts</option>
-                                </select>
-                            </div>
-                            
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="list-group">
-                                        <a href="#" class="list-group-item" data-ng-repeat="c in filtered = (vm.contacts | filter: contactFilter)"
-                                           data-ng-class="{active: $index == vm.activeIndex}"
-                                           data-ng-click="vm.select($index)">{{c.firstName}} {{c.lastName}}</a>
-                                    </div>
-                                    <div data-ng-hide="filtered.length" class="help-block">Nothing found</div>        
+                                <div class="row_offset_bottom clearfix">
+                                    <select class="form-control" placeholder="group" ng-model="vm.selectedGroup" data-ng-options="key as key for (key, value) in vm.groups">
+                                        <option value="">All Contacts</option>
+                                    </select>
                                 </div>
-                            </div>                            
+                            
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="list-group">
+                                            <a href="#" class="list-group-item" data-ng-repeat="c in filtered = (vm.contacts | filter: contactFilter)"
+                                               data-ng-class="{active: $index == vm.activeIndex}"
+                                               data-ng-click="vm.select($index)">{{c.firstName}} {{c.lastName}}</a>
+                                        </div>
+                                        <div data-ng-hide="filtered.length" class="help-block">Nothing found</div>        
+                                    </div>
+                                </div>                            
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-7" ng-show="filtered.length || vm.activeIndex == -1">
-                <div class="panel panel-default">
-                    <div class="panel-heading">{{vm.editContact.firstName}} {{vm.editContact.lastName}}</div>
-                    <div class="panel-body">
-                        <form name="editForm" novalidate>
-                            <input type="hidden" data-ng-model="vm.editContact.id" />
-                            <div class="form-group" data-ng-class="{'has-error': vm.isNotValid('firstName')}">
-                                <label for="firstName">Name</label>
-                                <input id="firstName" class="form-control" name="firstName" type="text" value="" required data-ng-model="vm.editContact.firstName" />
-                                <label class="control-label" for="firstName" ng-show="vm.isNotValid('firstName')">Name is required</label>
-                            </div>
-                            <div class="form-group" data-ng-class="{'has-error' : vm.isNotValid('lastName')}">
-                                <label class="control-label" for="surname">Surname</label>
-                                <input id="surname" class="form-control" name="lastName" type="text" value="" required data-ng-model="vm.editContact.lastName" />
-                                <label class="control-label" for="surname" ng-show="vm.isNotValid('lastName')">Surname is required</label>
-                            </div>
-                            <div class="form-group" data-ng-class="{'has-error' : vm.isNotValid('email')}">
-                                <label for="email">Email</label>
-                                <input id="email" class="form-control" name="email" type="text" value="" required data-ng-model="vm.editContact.email" />
-                                <label class="control-label" for="email" ng-show="vm.isNotValid('email')">Email is required</label>
-                            </div>
-                            <div class="form-group" data-ng-class="{'has-error' : vm.isNotValid('phone')}">
-                                <label for="phone">Phone</label>
-                                <input id="phone" class="form-control" name="phone" type="text" required="" value="" data-ng-model="vm.editContact.phone" />
-                                <label class="control-label" for="phone" ng-show="vm.isNotValid('phone')">Phone is required</label>
-                            </div>
-                            <div class="form-group">
-                                <label for="phone">Group</label>
-                                <input id="phone" class="form-control" name="group" type="text" value="" data-ng-model="vm.editContact.group" />
-                            </div>
-                            <button class="btn btn-primary" data-ng-disabled="editForm.$pristine || editForm.$invalid" data-ng-click="vm.saveContact()">Save</button>
-                            <button class="btn btn-danger" data-ng-show="vm.editContact.id >= 0" data-ng-click="vm.deleteContact()">Delete</button>
-                        </form>
+                <div class="col-md-7" ng-show="filtered.length || vm.activeIndex == -1">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">{{vm.editContact.firstName}} {{vm.editContact.lastName}}</div>
+                        <div class="panel-body">
+                            <form name="editForm" novalidate>
+                                <input type="hidden" data-ng-model="vm.editContact.id" />
+                                <div class="form-group" data-ng-class="{'has-error': vm.isNotValid('firstName')}">
+                                    <label for="firstName">Name</label>
+                                    <input id="firstName" class="form-control" name="firstName" type="text" value="" required data-ng-model="vm.editContact.firstName" />
+                                    <label class="control-label" for="firstName" ng-show="vm.isNotValid('firstName')">Name is required</label>
+                                </div>
+                                <div class="form-group" data-ng-class="{'has-error' : vm.isNotValid('lastName')}">
+                                    <label class="control-label" for="surname">Surname</label>
+                                    <input id="surname" class="form-control" name="lastName" type="text" value="" required data-ng-model="vm.editContact.lastName" />
+                                    <label class="control-label" for="surname" ng-show="vm.isNotValid('lastName')">Surname is required</label>
+                                </div>
+                                <div class="form-group" data-ng-class="{'has-error' : vm.isNotValid('email')}">
+                                    <label for="email">Email</label>
+                                    <input id="email" class="form-control" name="email" type="text" value="" required data-ng-model="vm.editContact.email" />
+                                    <label class="control-label" for="email" ng-show="vm.isNotValid('email')">Email is required</label>
+                                </div>
+                                <div class="form-group" data-ng-class="{'has-error' : vm.isNotValid('phone')}">
+                                    <label for="phone">Phone</label>
+                                    <input id="phone" class="form-control" name="phone" type="text" required="" value="" data-ng-model="vm.editContact.phone" />
+                                    <label class="control-label" for="phone" ng-show="vm.isNotValid('phone')">Phone is required</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Group</label>
+                                    <input id="phone" class="form-control" name="group" type="text" value="" data-ng-model="vm.editContact.group" />
+                                </div>
+                                <button class="btn btn-primary" data-ng-disabled="editForm.$pristine || editForm.$invalid" data-ng-click="vm.saveContact()">Save</button>
+                                <button class="btn btn-danger" data-ng-show="vm.editContact.id >= 0" data-ng-click="vm.deleteContact()">Delete</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <script src="Scripts/jquery-1.9.0.js"></script>
+        <script src="Scripts/jquery-1.9.0.js"></script>
 
-    <script src="Scripts/angular.js"></script>
-    <script src="Scripts/angular-ui-router.js"></script>
+        <script src="Scripts/angular.js"></script>
+        <script src="Scripts/angular-ui-router.js"></script>
 
-    <script src="Scripts/angular-ui/ui-bootstrap-tpls.js"></script>
+        <script src="Scripts/angular-ui/ui-bootstrap-tpls.js"></script>
 
-    <script src="Scripts/require.js" data-main="/addressbook/Scripts/main.js"></script>
-</body>
+        <script src="Scripts/require.js" data-main="/addressbook/Scripts/main.js"></script>
+    </body>
 </html>

@@ -1,3 +1,23 @@
-﻿.row_offset_bottom {
+﻿[ng\:cloak] .splash, 
+[ng-cloak] .splash, 
+[data-ng-cloak] .splash, 
+[x-ng-cloak] .splash, 
+.ng-cloak .splash, 
+.x-ng-cloak .splash {
+    background-color: lightcyan;
+    background-image: url(/Content/loader.gif);
+    background-size: 125px 125px;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: fixed;
+    top: 0; right: 0; bottom: 0; left: 0;
+    z-index: 99999;
+    display: block !important;
+}
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+     display: none;
+}
+
+.row_offset_bottom {
     padding-bottom: 15px;
 }
